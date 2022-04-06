@@ -12,6 +12,7 @@ let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
+  baseURL: `${process.env.VUE_APP_API_URL}/v1`
 };
 
 const _axios = axios.create(config);
@@ -40,7 +41,7 @@ _axios.interceptors.response.use(
 );
 
 // eslint-disable-next-line no-unused-vars
-Plugin.install = function(Vue, options) {
+Plugin.install = function(Vue) {
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {
