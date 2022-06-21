@@ -40,7 +40,7 @@
                 <v-flex v-for="(book) in books" :key="`book-`+book.id" xs6>
                 <v-card :to="'/book/'+ book.slug">
                     <v-img
-                    :src="book.cover"
+                    :src="getImage(book.cover)"
                     class="white--text"
                     >
                     <v-card-title 
@@ -63,30 +63,6 @@ export default {
     data: () => ({
         categories: [],
         books: [
-            { 
-                id: 1,
-                cover: 'https://via.placeholder.com/150',
-                title: 'Laravel 5.8',
-                slug: 'laravel-5-8'
-            },
-            { 
-                id: 2,
-                cover: 'https://via.placeholder.com/150',
-                title: 'Vue 2.6',
-                slug: 'vue-2-6'
-            },
-            { 
-                id: 3,
-                cover: 'https://via.placeholder.com/150',
-                title: 'PHP 7.4',
-                slug: 'php-7-4'
-            },
-            { 
-                id: 4,
-                cover: 'https://via.placeholder.com/150',
-                title: 'NodeJS 12',
-                slug: 'nodejs-12'
-            },
         ],
         loading: false
     }),
@@ -99,9 +75,18 @@ export default {
             // console.log(data);
             this.categories = data;
         },
+        async getDataBooks() {
+            this.loading = true;
+            const res = await this.axios.get('books/top/3');
+            this.loading = false;
+            const { data } = await res.data;
+            // console.log(data);
+            this.books = data;
+        },
     },
     mounted() {
         this.getDataCategories();
+        this.getDataBooks();
     }
 }
 </script>
