@@ -46,7 +46,7 @@
         </div>
       </template>
     </v-navigation-drawer>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark v-if="isHome">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Vueshop</v-toolbar-title>
       <!-- Pemisah Kontent -->
@@ -60,6 +60,20 @@
         </v-badge>
       </v-btn>
       <v-text-field slot="extension" hide-details append-icon="mdi-microphone" flat label="Search" prepend-inner-icon="mdi-magnify" solo-inverted></v-text-field>
+    </v-app-bar>
+    <v-app-bar app color="primary" dark v-else>
+      <v-btn icon @click.stop="$router.go(-1)">
+        <v-icon>mdi-arrow-left-circle</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn icon to="/about">
+        <v-badge color="orange" overlap>
+          <template v-slot:badge>
+            <span>3</span>
+          </template>
+          <v-icon>mdi-cart</v-icon>
+        </v-badge>
+      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container fluid>
@@ -89,5 +103,10 @@ export default {
     { title: 'About', icon: 'mdi-account', route: '/about' },],
     guest: false,
   }),
+  computed: {
+    isHome() {
+      return (this.$route.path === '/')
+    }
+  }
 };
 </script>
