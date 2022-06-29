@@ -31,6 +31,16 @@ const routes = [
     path: '/books',
     name: 'books',
     component: () => import('../views/BooksView.vue')
+  },
+  {
+    path: '/category/:slug',
+    name: 'slug',
+    component: () => import('../views/CategoryView.vue')
+  },
+  {
+    path: '/book/:slug',
+    name: 'book',
+    component: () => import('../views/BookView.vue')
   }
 ]
 
