@@ -4,7 +4,7 @@
       <v-list>
         <v-list-item v-if="!guest">
           <v-list-item-avatar>
-            <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+            <v-img :src="getImage(user.avatar)"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>Andika Jaya</v-list-item-title>
